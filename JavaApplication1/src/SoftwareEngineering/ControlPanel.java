@@ -1,9 +1,12 @@
+package SoftwareEngineering;
+
+import SoftwareEngineering.ControlPanel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SystemEngineering;
 
 /**
  *
@@ -44,10 +47,10 @@ public class ControlPanel extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(678, 450));
         setSize(new java.awt.Dimension(678, 450));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 4));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 60)); // NOI18N
         jLabel1.setText("Control Panel");

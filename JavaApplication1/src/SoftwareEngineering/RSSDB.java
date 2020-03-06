@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rss;
+package SoftwareEngineering;
 import java.sql.*;
 import java.util.Scanner;
 import java.time.LocalDate; // import the LocalDate class
@@ -13,7 +13,7 @@ import java.time.LocalDate; // import the LocalDate class
  */
 
 
-public class RSS {
+public class RSSDB {
 
     /**
      * @param args the command line arguments
