@@ -7,6 +7,7 @@ package SoftwareEngineering;
 
 import SoftwareEngineering.ControlPanel;
 
+
 /**
  *
  * @author lang
@@ -43,7 +44,7 @@ public class AddClient extends javax.swing.JFrame {
         txtAddress = new javax.swing.JTextField();
         txtPostcode = new javax.swing.JTextField();
         txtSurname = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,8 +113,13 @@ public class AddClient extends javax.swing.JFrame {
 
         txtSurname.setName("txtSurname"); // NOI18N
 
-        jButton1.setText("Add");
-        jButton1.setName("btnAdd"); // NOI18N
+        btnAdd.setText("Add");
+        btnAdd.setName("btnAdd"); // NOI18N
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnReset.setText("Reset");
         btnReset.setName("btnReset"); // NOI18N
@@ -152,7 +158,7 @@ public class AddClient extends javax.swing.JFrame {
                         .addComponent(txtForename, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(btnAdd)
                     .addComponent(btnReset))
                 .addGap(50, 50, 50))
         );
@@ -168,7 +174,7 @@ public class AddClient extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnAdd)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
@@ -229,6 +235,22 @@ public class AddClient extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        try {  
+        RSSDB.connect();
+        // establish connection  
+         
+        RSSDB.executeUpdate("INSERT INTO student VALUES(" + jTextField1.getText() + ",'" + jTextField2.getText() + "'," + jTextField3.getText() + ")");  
+        JOptionPane.showMessageDialog(null, "Record inserted...");  
+        statement.close();  
+        con.close();  
+        Referesh(); //Calling Referesh() method  
+    } catch (SQLException | ClassNotFoundException e) {  
+        JOptionPane.showMessageDialog(null, e);  
+    }
+    }//GEN-LAST:event_btnAddActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,9 +288,9 @@ public class AddClient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReset;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
