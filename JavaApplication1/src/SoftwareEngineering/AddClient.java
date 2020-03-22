@@ -7,18 +7,19 @@ package SoftwareEngineering;
 
 import SoftwareEngineering.ControlPanel;
 
-
 /**
  *
- * @author lang
+ * @author Reece McMahon w18009185
  */
 public class AddClient extends javax.swing.JFrame {
-
+    
+   
     /**
      * Creates new form BookingSystem
      */
     public AddClient() {
         initComponents();
+         lblError.setVisible(false);
     }
 
     /**
@@ -46,6 +47,7 @@ public class AddClient extends javax.swing.JFrame {
         txtSurname = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        lblError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(678, 450));
@@ -129,6 +131,10 @@ public class AddClient extends javax.swing.JFrame {
             }
         });
 
+        lblError.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblError.setForeground(new java.awt.Color(255, 0, 0));
+        lblError.setText("Please fill in all fields");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -136,10 +142,6 @@ public class AddClient extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(157, 157, 157)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,12 +157,20 @@ public class AddClient extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(txtForename, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtForename, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdd)
                     .addComponent(btnReset))
                 .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(184, 184, 184))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +198,8 @@ public class AddClient extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
         );
 
         txtForename.getAccessibleContext().setAccessibleName("txtForename");
@@ -212,21 +223,23 @@ public class AddClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:            
+        txtForename.setText("");
+        txtSurname.setText("");
+        txtDOB.setText("");
+        txtAddress.setText("");
+        txtPostcode.setText("");        
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        
         
         txtForename.setText("");
         txtSurname.setText("");
         txtDOB.setText("");
         txtAddress.setText("");
         txtPostcode.setText("");
-        
-        
-        
-    }//GEN-LAST:event_btnResetActionPerformed
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        lblError.setVisible(false);
         
         ControlPanel ul =new ControlPanel();
         ul.setVisible(true);
@@ -236,19 +249,34 @@ public class AddClient extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        try {  
-        RSSDB.connect();
-        // establish connection  
-         
-        RSSDB.executeUpdate("INSERT INTO student VALUES(" + jTextField1.getText() + ",'" + jTextField2.getText() + "'," + jTextField3.getText() + ")");  
-        JOptionPane.showMessageDialog(null, "Record inserted...");  
-        statement.close();  
-        con.close();  
-        Referesh(); //Calling Referesh() method  
-    } catch (SQLException | ClassNotFoundException e) {  
-        JOptionPane.showMessageDialog(null, e);  
-    }
+        // TODO add your handling code here:       
+        int errors = 0;
+        
+        if(txtForename.getText().isEmpty()){
+            errors = errors + 1;
+        }
+        if(txtSurname.getText().isEmpty()){
+            errors = errors + 1;
+        }       
+        if(txtDOB.getText().isEmpty()){
+            errors = errors + 1;
+        }        
+        if(txtAddress.getText().isEmpty()){
+            errors = errors + 1;
+        }       
+        if(txtPostcode.getText().isEmpty()){
+             errors = errors + 1;
+        }
+                
+        if(errors>0){
+            lblError.setVisible(true);
+        }
+        else{
+            lblError.setVisible(false);
+            //ADD CLIENT TO THE DATABASE
+               
+        }
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
@@ -299,6 +327,7 @@ public class AddClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblError;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtDOB;
     private javax.swing.JTextField txtForename;
