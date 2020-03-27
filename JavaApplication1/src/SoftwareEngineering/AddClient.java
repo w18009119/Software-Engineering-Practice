@@ -6,6 +6,12 @@
 package SoftwareEngineering;
 
 import SoftwareEngineering.ControlPanel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +25,47 @@ public class AddClient extends javax.swing.JFrame {
      */
     public AddClient() {
         initComponents();
-         lblError.setVisible(false);
+        
+        Connection conn = null; 
+        
+         try {
+            // db parameters
+            String url = "jdbc:sqlite:C:\\Users\\lang\\Desktop\\SQLite\\booking.db";
+            // create a connection to the database
+            conn = DriverManager.getConnection(url);
+            System.out.println("Connection to SQLite has been established.");
+            
+            String sql = "SELECT client_id FROM client ORDER BY client_id DESC LIMIT 1";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            ResultSet rs=pstmt.executeQuery();
+            if(rs.next()){
+                String add1=rs.getString("client_id");
+                int result = Integer.parseInt(add1);
+                result=result+1;
+                
+                String ID = Integer.toString(result);
+                txtClientID.setText(ID);    
+            }
+            conn.close();
+                
+                if(txtClientID.getText().isEmpty() ){
+                    txtClientID.setText("1");
+                }
+         }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        
     }
 
     /**
@@ -41,13 +87,15 @@ public class AddClient extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtDOB = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
         txtPostcode = new javax.swing.JTextField();
         txtSurname = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
-        lblError = new javax.swing.JLabel();
+        txtDOB = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtClientID = new javax.swing.JTextPane();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(678, 450));
@@ -74,7 +122,7 @@ public class AddClient extends javax.swing.JFrame {
                 .addComponent(btnBack)
                 .addGap(119, 119, 119)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,8 +155,6 @@ public class AddClient extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("Postcode");
 
-        txtDOB.setName("txtDOB"); // NOI18N
-
         txtAddress.setName("txtAddress"); // NOI18N
 
         txtPostcode.setName("txtPostcode"); // NOI18N
@@ -131,65 +177,86 @@ public class AddClient extends javax.swing.JFrame {
             }
         });
 
-        lblError.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblError.setForeground(new java.awt.Color(255, 0, 0));
-        lblError.setText("Please fill in all fields");
+        try {
+            txtDOB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        txtClientID.setEditable(false);
+        txtClientID.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setViewportView(txtClientID);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel7.setText("ClientID");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtForename, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(42, 42, 42)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtForename, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
+                .addGap(103, 103, 103)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdd)
                     .addComponent(btnReset))
-                .addGap(50, 50, 50))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(184, 184, 184))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(btnAdd)
+                .addGap(23, 23, 23)
+                .addComponent(btnReset)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 1, Short.MAX_VALUE)
+                        .addComponent(jLabel7))
+                    .addComponent(jScrollPane1))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(txtForename, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAdd)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4)
-                    .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReset))
+                    .addComponent(txtDOB, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,8 +265,7 @@ public class AddClient extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         txtForename.getAccessibleContext().setAccessibleName("txtForename");
@@ -239,8 +305,7 @@ public class AddClient extends javax.swing.JFrame {
         txtDOB.setText("");
         txtAddress.setText("");
         txtPostcode.setText("");
-        lblError.setVisible(false);
-        
+       
         ControlPanel ul =new ControlPanel();
         ul.setVisible(true);
         dispose();
@@ -252,10 +317,12 @@ public class AddClient extends javax.swing.JFrame {
         // TODO add your handling code here:       
         int errors = 0;
         
+        
+        //Empty textbox validation
         if(txtForename.getText().isEmpty()){
             errors = errors + 1;
         }
-        if(txtSurname.getText().isEmpty()){
+                if(txtSurname.getText().isEmpty()){
             errors = errors + 1;
         }       
         if(txtDOB.getText().isEmpty()){
@@ -267,16 +334,81 @@ public class AddClient extends javax.swing.JFrame {
         if(txtPostcode.getText().isEmpty()){
              errors = errors + 1;
         }
-                
-        if(errors>0){
-            lblError.setVisible(true);
+        
+        
+        //Length Validation
+        if(txtForename.getText().length() >20){
+            errors = errors + 1;
         }
-        else{
-            lblError.setVisible(false);
-            //ADD CLIENT TO THE DATABASE
-               
+        if(txtSurname.getText().length() >20){
+            errors = errors + 1;
+        }
+        if(txtDOB.getText().length() >10){
+            errors = errors + 1;
+        }
+        if(txtAddress.getText().length() >100){
+            errors = errors + 1;
+        }
+        if(txtPostcode.getText().length() >8){
+            errors = errors + 1;
         }
         
+        
+        
+                
+        if(errors>0){
+            JOptionPane.showMessageDialog(null, "Please fill in all fields");  
+        }
+        else{
+            //ADD CLIENT TO THE DATABASE
+            Connection conn = null; 
+          try {
+            // db parameters
+            String url = "jdbc:sqlite:C:\\Users\\lang\\Desktop\\SQLite\\booking.db";
+            // create a connection to the database
+            conn = DriverManager.getConnection(url);
+            System.out.println("Connection to SQLite has been established.");
+            
+            String sql = "INSERT INTO client(first_name, last_name, DOB, Address, Postcode) VALUES(?,?,?,?,?)";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // set the corresponding param
+            String fname = txtForename.getText();
+            String sname = txtSurname.getText();
+            String DOB = txtDOB.getText();
+            String Address = txtAddress.getText();
+            String postcode = txtPostcode.getText();
+            
+            pstmt.setString(1, fname);
+            pstmt.setString(2, sname);
+            pstmt.setString(3, DOB);
+            pstmt.setString(4, Address);
+            pstmt.setString(5, postcode);
+            
+            String ID = txtClientID.getText();
+            
+            // insert
+            pstmt.executeUpdate();
+            conn.close();
+            
+            JOptionPane.showMessageDialog(null, "Client with ID number "+ID+" has been added.");
+            ControlPanel ul =new ControlPanel();
+            ul.setVisible(true);
+            dispose();
+              
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        } 
+    }      
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
@@ -325,11 +457,13 @@ public class AddClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblError;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtDOB;
+    private javax.swing.JTextPane txtClientID;
+    private javax.swing.JFormattedTextField txtDOB;
     private javax.swing.JTextField txtForename;
     private javax.swing.JTextField txtPostcode;
     private javax.swing.JTextField txtSurname;
