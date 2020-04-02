@@ -1,6 +1,5 @@
 package SoftwareEngineering;
 
-import SoftwareEngineering.ControlPanel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -34,8 +33,8 @@ public class ControlPanel extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btnAddClient = new javax.swing.JButton();
-        btnAmendClient = new javax.swing.JButton();
+        btnAddtoQueue = new javax.swing.JButton();
+        btnAssignClient = new javax.swing.JButton();
 
         btnReset1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnReset1.setText("Add Client");
@@ -49,46 +48,50 @@ public class ControlPanel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(678, 450));
 
+        jPanel1.setBackground(new java.awt.Color(251, 199, 123));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jPanel1.setForeground(new java.awt.Color(0, 0, 4));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 60)); // NOI18N
-        jLabel1.setText("Control Panel");
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 60)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Control Panel ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(184, 184, 184)
-                .addComponent(jLabel1)
-                .addContainerGap(132, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(367, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(324, 324, 324))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(23, 23, 23))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(251, 199, 123));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
 
-        btnAddClient.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAddClient.setText("Add Client");
-        btnAddClient.setName("btnAddClient"); // NOI18N
-        btnAddClient.addActionListener(new java.awt.event.ActionListener() {
+        btnAddtoQueue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddtoQueue.setText("Add to Queue");
+        btnAddtoQueue.setName("btnAddtoQueue"); // NOI18N
+        btnAddtoQueue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddClientActionPerformed(evt);
+                btnAddtoQueueActionPerformed(evt);
             }
         });
 
-        btnAmendClient.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAmendClient.setText("Amend Client");
-        btnAmendClient.setName("btnReset"); // NOI18N
-        btnAmendClient.addActionListener(new java.awt.event.ActionListener() {
+        btnAssignClient.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAssignClient.setText("Assign Client");
+        btnAssignClient.setName("btnReset"); // NOI18N
+        btnAssignClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAmendClientActionPerformed(evt);
+                btnAssignClientActionPerformed(evt);
             }
         });
 
@@ -96,21 +99,21 @@ public class ControlPanel extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(btnAddClient, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAmendClient, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAddtoQueue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAssignClient, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(352, 352, 352))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAmendClient, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddClient, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(169, 169, 169)
+                .addComponent(btnAddtoQueue, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAssignClient, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(428, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,32 +127,31 @@ public class ControlPanel extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClientActionPerformed
+    private void btnAddtoQueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddtoQueueActionPerformed
         // TODO add your handling code here:
-    AddClient ul =new AddClient();
+    Add ul =new Add();
         ul.setVisible(true);
         dispose();
 
-    }//GEN-LAST:event_btnAddClientActionPerformed
+    }//GEN-LAST:event_btnAddtoQueueActionPerformed
 
     private void btnReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReset1ActionPerformed
 
-    private void btnAmendClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmendClientActionPerformed
-        // TODO add your handling coe here:
-        
-        AmendDetails ul =new AmendDetails();
+    private void btnAssignClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignClientActionPerformed
+        // TODO add your handling code here:
+        AssignClient ul =new AssignClient();
         ul.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnAmendClientActionPerformed
+        dispose();        
+    }//GEN-LAST:event_btnAssignClientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,8 +189,8 @@ public class ControlPanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddClient;
-    private javax.swing.JButton btnAmendClient;
+    private javax.swing.JButton btnAddtoQueue;
+    private javax.swing.JButton btnAssignClient;
     private javax.swing.JButton btnReset1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
