@@ -107,6 +107,7 @@ public class AddNewClient extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        btnHelp = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtClientID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -118,7 +119,6 @@ public class AddNewClient extends javax.swing.JFrame {
         txtPostcode = new javax.swing.JTextField();
         txtSurname = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        btnReset = new javax.swing.JButton();
         txtDOB = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         txtForename = new javax.swing.JTextField();
@@ -153,6 +153,14 @@ public class AddNewClient extends javax.swing.JFrame {
             }
         });
 
+        btnHelp.setBackground(new java.awt.Color(219, 253, 253));
+        btnHelp.setLabel("Help");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -162,18 +170,22 @@ public class AddNewClient extends javax.swing.JFrame {
                 .addComponent(btnBack)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(270, 270, 270))
+                .addGap(207, 207, 207)
+                .addComponent(btnHelp)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnBack))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBack))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -210,19 +222,13 @@ public class AddNewClient extends javax.swing.JFrame {
 
         txtSurname.setName("txtSurname"); // NOI18N
 
+        btnAdd.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnAdd.setText("Add");
         btnAdd.setName("btnAdd"); // NOI18N
+        btnAdd.setPreferredSize(new java.awt.Dimension(73, 37));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
-            }
-        });
-
-        btnReset.setText("Reset");
-        btnReset.setName("btnReset"); // NOI18N
-        btnReset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetActionPerformed(evt);
             }
         });
 
@@ -288,10 +294,8 @@ public class AddNewClient extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 335, Short.MAX_VALUE)
+                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel10)
@@ -369,8 +373,7 @@ public class AddNewClient extends javax.swing.JFrame {
                             .addComponent(jLabel9)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(59, 59, 59)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -426,15 +429,6 @@ public class AddNewClient extends javax.swing.JFrame {
     private void txtForenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtForenameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtForenameActionPerformed
-
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
-        txtClientID.setText("");
-        txtSurname.setText("");
-        txtDOB.setText("");
-        txtAddress.setText("");
-        txtPostcode.setText("");
-    }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
@@ -660,6 +654,14 @@ public class AddNewClient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQueueIDActionPerformed
 
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        // TODO add your handling code here:
+
+        JOptionPane.showMessageDialog(null,
+            "<html><h1><b>Steps to adding a new Client to the queue</b></h1>\nFill in all the details\nClick the 'Add' button to add the client into the queue\n\nQueueID and ClientID are automatically assigned to each client"
+            ,"Help", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnHelpActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -701,7 +703,7 @@ public class AddNewClient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnHelp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

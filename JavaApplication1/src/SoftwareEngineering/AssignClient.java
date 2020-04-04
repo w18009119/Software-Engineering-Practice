@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
+import java.lang.ArrayIndexOutOfBoundsException;
 /**
  *
  * @author lang
@@ -41,14 +41,16 @@ public class AssignClient extends javax.swing.JFrame {
              session = tblQueue.getValueAt(tblQueue.getSelectedRow(), 1).toString();
             txtClientID.setText(session);
             
-             String category  = tblQueue.getValueAt(tblQueue.getSelectedRow(), 2).toString();
-            txtCategory.setText(category);
+              session  = tblQueue.getValueAt(tblQueue.getSelectedRow(), 2).toString();
+            txtCategory.setText(session);
             
              session = tblQueue.getValueAt(tblQueue.getSelectedRow(), 3).toString();
             txtForename.setText(session);
             
              session = tblQueue.getValueAt(tblQueue.getSelectedRow(), 4).toString();
             txtSurname.setText(session);
+            
+            
 
 
         }
@@ -76,7 +78,6 @@ public class AssignClient extends javax.swing.JFrame {
     
     tblVolunteer.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
         public void valueChanged(ListSelectionEvent event) {
-
             // print column value from selected row
             String session = tblVolunteer.getValueAt(tblVolunteer.getSelectedRow(), 0).toString();
             txtSessionID.setText(session);
@@ -94,8 +95,9 @@ public class AssignClient extends javax.swing.JFrame {
             txtRoom.setText(session);
             
             session = tblVolunteer.getValueAt(tblVolunteer.getSelectedRow(), 5).toString();
-            txtVolCategory.setText(session);       
+            txtVolCategory.setText(session);        
         }
+        
     }); 
     
     conn.close();
@@ -125,7 +127,6 @@ public class AssignClient extends javax.swing.JFrame {
 
         String category = txtCategory.getText();
 
-
         String field[] ={"Benefits", "Debt", "Housing", "Employment"};
         String specialise[] ={"specialiseBenefits","specialiseDebt","specialiseHousing","specialiseEmployment"};
         String categorys[] ={"Benefits","Debt","Housing","Employment"};
@@ -140,19 +141,13 @@ public class AssignClient extends javax.swing.JFrame {
                 {
                 int z = rs.getInt("sessionID");
                 int y = rs.getInt("volunteerID");
-
-                String f = rs.getString("specialiseBenefits");
-                String g = rs.getString("specialiseDebt");
-                String h = rs.getString("specialiseHousing");
-                String grw = rs.getString("specialiseEmployment");
-
                 String j = rs.getString("date");
                 String k = rs.getString("time");
                 int l = rs.getInt("room");
                 String m = categorys[i];
                 model.addRow(new Object[]{z, y, j, k, l, m});
                 }  
-
+                
             }
         }
 
@@ -164,6 +159,63 @@ public class AssignClient extends javax.swing.JFrame {
         }
     }
 });    
+    
+    
+    txtQueueID.getDocument().addDocumentListener(new DocumentListener() {  
+    public void changedUpdate(DocumentEvent e) {
+    }
+    public void removeUpdate(DocumentEvent e) {
+    }        
+    
+    public void insertUpdate(DocumentEvent e) {
+                    
+        txtSessionID.setText("");
+        txtVolunteerID.setText("");
+        txtDate.setText("");
+        txtTime.setText("");
+        txtRoom.setText("");
+        txtVolCategory.setText("");
+        
+        txtSelectedSessionID.setText("");
+        txtSelectedVolunteerID.setText("");
+        txtSelectedDate.setText("");
+        txtSelectedTime.setText("");
+        txtSelectedRoom.setText("");
+        
+        txtSelectedClientID.setText("");
+        txtSelectedCategory.setText("");
+        
+        
+        
+    }
+});    
+    
+    
+    txtVolCategory.getDocument().addDocumentListener(new DocumentListener() {  
+    public void changedUpdate(DocumentEvent e) {
+    }
+    public void removeUpdate(DocumentEvent e) {
+    }        
+    
+    public void insertUpdate(DocumentEvent e) {
+                    
+        
+        txtSelectedSessionID.setText(txtSessionID.getText());
+        txtSelectedVolunteerID.setText(txtVolunteerID.getText());
+        txtSelectedDate.setText(txtDate.getText());
+        txtSelectedTime.setText(txtTime.getText());
+        txtSelectedRoom.setText(txtRoom.getText());
+        
+        txtSelectedClientID.setText(txtClientID.getText());
+        txtSelectedCategory.setText(txtCategory.getText());
+        
+    }
+});    
+    
+    
+    
+    
+    
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,8 +228,8 @@ public class AssignClient extends javax.swing.JFrame {
 
         jPanel7 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        btnBack5 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnHelp = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtClientID = new javax.swing.JTextField();
@@ -204,7 +256,7 @@ public class AssignClient extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblQueue = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtSelectedSessionID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -219,7 +271,6 @@ public class AssignClient extends javax.swing.JFrame {
         txtSelectedTime = new javax.swing.JTextField();
         txtSelectedRoom = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        btnChoose = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         txtVolCategory = new javax.swing.JTextField();
@@ -234,19 +285,19 @@ public class AssignClient extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Assign Client ");
 
-        btnBack5.setText("Back");
-        btnBack5.setToolTipText("");
-        btnBack5.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Back");
+        btnBack.setToolTipText("");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBack5btnBackActionPerformed(evt);
+                btnBackbtnBackActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(219, 253, 253));
-        jButton2.setLabel("Help");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnHelp.setBackground(new java.awt.Color(219, 253, 253));
+        btnHelp.setLabel("Help");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnHelpActionPerformed(evt);
             }
         });
 
@@ -256,11 +307,11 @@ public class AssignClient extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnBack5)
+                .addComponent(btnBack)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(200, 200, 200)
-                .addComponent(jButton2)
+                .addComponent(btnHelp)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -268,8 +319,8 @@ public class AssignClient extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack5))
+                    .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
@@ -452,10 +503,10 @@ public class AssignClient extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblQueue);
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
@@ -479,13 +530,6 @@ public class AssignClient extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel18.setText("Room");
-
-        btnChoose.setText("Choose");
-        btnChoose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChooseActionPerformed(evt);
-            }
-        });
 
         btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
@@ -514,21 +558,6 @@ public class AssignClient extends javax.swing.JFrame {
                 .addGap(164, 164, 164)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSelectedSessionID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSelectedVolunteerID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSelectedClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(96, 96, 96))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addGap(18, 18, 18)
                         .addComponent(txtSelectedCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -543,10 +572,24 @@ public class AssignClient extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addComponent(txtSelectedRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))))
+                        .addComponent(txtSelectedRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSelectedSessionID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSelectedVolunteerID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSelectedClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1))
@@ -606,14 +649,8 @@ public class AssignClient extends javax.swing.JFrame {
                                                 .addComponent(txtVolunteerID, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(txtRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
-                                        .addComponent(btnChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(273, 273, 273))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(58, 58, 58)
-                                        .addComponent(jScrollPane2)))))
+                                .addGap(58, 58, 58)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)))
                         .addGap(52, 52, 52))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -672,29 +709,25 @@ public class AssignClient extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtRoom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtVolCategory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(9, 9, 9)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtSelectedSessionID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtSelectedVolunteerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtSelectedClientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtSelectedSessionID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtSelectedVolunteerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)
-                            .addComponent(txtSelectedClientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(txtSelectedCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -706,7 +739,6 @@ public class AssignClient extends javax.swing.JFrame {
                             .addComponent(txtSelectedRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(51, 51, 51))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -730,13 +762,13 @@ public class AssignClient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBack5btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack5btnBackActionPerformed
+    private void btnBackbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackbtnBackActionPerformed
         // TODO add your handling code here:
         ControlPanel ul =new ControlPanel();
         ul.setVisible(true);
         
         dispose();
-    }//GEN-LAST:event_btnBack5btnBackActionPerformed
+    }//GEN-LAST:event_btnBackbtnBackActionPerformed
 
     private void txtSurnameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSurnameKeyReleased
         // TODO add your handling code here:
@@ -788,57 +820,104 @@ public class AssignClient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRoomKeyReleased
 
-    private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseActionPerformed
-        // TODO add your handling code here:
-
-    if((txtQueueID.getText().isEmpty() ||txtSessionID.getText().isEmpty()) ){
-        JOptionPane.showMessageDialog(null, "Please choose a record out of each table");  
-    }
-    else if(txtCategory.getText().equals(txtVolCategory.getText())){
-        tblQueue.setVisible(false);
-        tblVolunteer.setVisible(false);
-        txtSelectedSessionID.setText(txtSessionID.getText());
-        txtSelectedVolunteerID.setText(txtVolunteerID.getText());
-        txtSelectedDate.setText(txtDate.getText());
-        txtSelectedTime.setText(txtTime.getText());
-        txtSelectedRoom.setText(txtRoom.getText());
-        
-        txtSelectedClientID.setText(txtClientID.getText());
-        txtSelectedCategory.setText(txtCategory.getText());
-        
-    }
-    else{
-        JOptionPane.showMessageDialog(null, "Client category doesn't meet the volunteers");  
-        dispose();
-        AssignClient ul =new AssignClient();
-        ul.setVisible(true);
-        
-        
-        
-        
-
-    }
-    
-        
-        
-    }//GEN-LAST:event_btnChooseActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
         // TODO add your handling code here:
         
         JOptionPane.showMessageDialog(null, 
-                "<html><h1><b>Steps to booking a meeting</b></h1>\nSelect a client in the Queue table\nSelect a Volunteer Available table\nClick the 'Choose' button to confirm each of the choices\nClick the 'Add' button to book the meeting"
+                "<html><h1><b>Steps to booking a meeting</b></h1>\nSelect a client in the Queue table\nSelect a Volunteer Available table\n\nClick the 'Add' button to book the meeting"
                 ,"Help", JOptionPane.INFORMATION_MESSAGE);
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnHelpActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        if(txtSelectedSessionID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please choose a record from each table");
+        }
+        else{
+            
+        
+        Connection conn = null;
+        String queueSum = txtQueueID.getText();
+        try {
+            
+            String summary=null;
+                // db parameters
+                String url = "jdbc:sqlite:C:\\Users\\lang\\Desktop\\SQLite\\booking.db";
+                // create a connection to the database
+                conn = DriverManager.getConnection(url);
+                System.out.println("Connection to SQLite has been established.");
+                
+
+                String sql = "SELECT summary FROM queue WHERE queue_id = "+queueSum+"";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                ResultSet rs=pstmt.executeQuery();
+
+                if(rs.next()){
+                 summary=rs.getString("summary");
+                System.out.println(summary);
+                }
+                
+                
+                
+                sql = "INSERT INTO meeting(sessionID, client_id, volunteerID , category , summary , date , time , room, status) VALUES(?,?,?,?,?,?,?,?,?)";
+
+                 pstmt = conn.prepareStatement(sql);
+
+                // set the corresponding param
+
+                pstmt.setString(1, txtSelectedSessionID.getText());
+                pstmt.setString(2, txtSelectedClientID.getText());
+                pstmt.setString(3, txtSelectedVolunteerID.getText());
+                pstmt.setString(4, txtSelectedCategory.getText());
+                pstmt.setString(5, summary);
+                pstmt.setString(6, txtSelectedDate.getText());
+                pstmt.setString(7, txtSelectedTime.getText());
+                pstmt.setString(8, txtSelectedRoom.getText());
+                pstmt.setString(9, "Upcoming");
+
+                // insert
+                pstmt.executeUpdate();
+
+                
+                sql = "DELETE FROM queue WHERE queue_id="+txtQueueID.getText()+"";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.executeUpdate();
+                
+                sql = "DELETE FROM VolunteerAvailability WHERE sessionID ="+txtSelectedSessionID.getText()+"";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.executeUpdate();
+                
+                
+                JOptionPane.showMessageDialog(null, "Meeting booked.");
+                
+                conn.close();
+                
+                
+                dispose();
+                AssignClient ul =new AssignClient();
+                ul.setVisible(true);  
+                
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            } 
+        }
+                
+                
+        
+        
+        
+        
+        
+        
+        
+        
         
         
    
     
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
@@ -887,11 +966,10 @@ public class AssignClient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack5;
-    private javax.swing.JButton btnChoose;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnReset;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

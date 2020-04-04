@@ -5,6 +5,7 @@
  */
 package SoftwareEngineering;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,61 +14,22 @@ import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.TimeZone;
 import javax.swing.JOptionPane;
-
+import java.awt.Color;
 /**
  *
  * @author lang
  */
-public class AddReturningClient extends javax.swing.JFrame {
+public class AmendDetails extends javax.swing.JFrame {
 
     /**
      * Creates new form AmendDetails
      */
-    public AddReturningClient() {
-       initComponents();
+    public AmendDetails() {
+        initComponents();
         
-        Connection conn = null; 
         
-         try {
-            // db parameters
-            String url = "jdbc:sqlite:C:\\Users\\lang\\Desktop\\SQLite\\booking.db";
-            // create a connection to the database
-            conn = DriverManager.getConnection(url);
-            System.out.println("Connection to SQLite has been established.");
- 
-            String sql = "SELECT queue_id FROM queue ORDER BY queue_id DESC LIMIT 1 ";
-
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            ResultSet rs=pstmt.executeQuery();
-            if(rs.next()){
-                String add1=rs.getString("queue_id");
-                int result = Integer.parseInt(add1);
-                result=result+1;
-                
-                String ID = Integer.toString(result);
-                txtQueueID.setText(ID);    
-            }
-            
-                
-                if(txtQueueID.getText().isEmpty() ){
-                    txtQueueID.setText("1");
-                }
-                
-                
-                
-         }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
+        
+        
         
     }
 
@@ -85,8 +47,7 @@ public class AddReturningClient extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         btnHelp = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        btnAdd = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -95,11 +56,6 @@ public class AddReturningClient extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtSummary = new javax.swing.JTextArea();
-        txtCategory = new javax.swing.JComboBox<>();
         txtPostcode = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
         txtTelephone = new javax.swing.JTextField();
@@ -108,10 +64,8 @@ public class AddReturningClient extends javax.swing.JFrame {
         txtSurname = new javax.swing.JTextField();
         txtForename = new javax.swing.JTextField();
         txtClientID = new javax.swing.JTextField();
-        txtQueueID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(678, 450));
 
         jPanel7.setBackground(new java.awt.Color(251, 199, 123));
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
@@ -119,13 +73,13 @@ public class AddReturningClient extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 2, 60)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Add Returning Client ");
+        jLabel12.setText("Amend Client Details");
 
         btnBack.setText("Back");
         btnBack.setToolTipText("");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                btnBackbtnBackActionPerformed(evt);
             }
         });
 
@@ -168,17 +122,14 @@ public class AddReturningClient extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(251, 199, 123));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
 
-        btnAdd.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnAdd.setText("Add");
-        btnAdd.setName("btnAdd"); // NOI18N
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.setName("btnAdd"); // NOI18N
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel13.setText("QueueID");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setText("ClientID");
@@ -203,18 +154,6 @@ public class AddReturningClient extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("Postcode");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel11.setText("Category");
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel14.setText("Summary");
-
-        txtSummary.setColumns(20);
-        txtSummary.setRows(5);
-        jScrollPane1.setViewportView(txtSummary);
-
-        txtCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Benefits", "Debt", "Housing", "Employment" }));
 
         txtPostcode.setEditable(false);
         txtPostcode.setBackground(new java.awt.Color(192, 192, 192));
@@ -265,26 +204,12 @@ public class AddReturningClient extends javax.swing.JFrame {
             }
         });
 
-        txtQueueID.setEditable(false);
-        txtQueueID.setBackground(new java.awt.Color(192, 192, 192));
-        txtQueueID.setName("txtClientID"); // NOI18N
-        txtQueueID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQueueIDActionPerformed(evt);
-            }
-        });
-        txtQueueID.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtQueueIDKeyReleased(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(418, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(399, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -292,9 +217,7 @@ public class AddReturningClient extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addGap(27, 27, 27))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))
+                            .addComponent(jLabel2)
                             .addGap(3, 3, 3))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,59 +225,55 @@ public class AddReturningClient extends javax.swing.JFrame {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel14)
                     .addComponent(jLabel6))
                 .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtAddress)
-                        .addComponent(txtPostcode)
-                        .addComponent(txtCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtForename, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQueueID, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtAddress)
+                                .addComponent(txtPostcode)
+                                .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtForename, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(407, 407, 407))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(86, 86, 86)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel13)
-                    .addComponent(txtQueueID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtClientID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9)
+                    .addComponent(txtClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(txtForename, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                            .addComponent(jLabel4))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)))
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,15 +286,7 @@ public class AddReturningClient extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -397,25 +308,35 @@ public class AddReturningClient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+    private void btnBackbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackbtnBackActionPerformed
         // TODO add your handling code here:
-        Add ul =new Add();
+        ControlPanel ul =new ControlPanel();
         ul.setVisible(true);
         dispose();
 
-        
-    }//GEN-LAST:event_btnBackActionPerformed
+    }//GEN-LAST:event_btnBackbtnBackActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-     // TODO add your handling code here:
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        // TODO add your handling code here:
+
+        JOptionPane.showMessageDialog(null,
+            "<html><h1><b>Steps to amending a Clients details</b></h1>\n"
+            + "Type in the clients ClientID which will automatically retrieve all  fields.\n"
+            + "Change any details desired\n"
+            + "Click the 'Update' button to change any of the details"  
+            ,"Help", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnHelpActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
         int dateErrors = 0;
         int lengthErrors = 0;
         int emptyErrors =0;
 
-        String[] empty = {txtClientID.getText(), txtForename.getText(), txtSurname.getText(), txtEmail.getText(),txtTelephone.getText(), txtAddress.getText(), txtPostcode.getText(), txtSummary.getText()};
+        String[] empty = {txtClientID.getText(), txtForename.getText(), txtSurname.getText(), txtEmail.getText(),txtTelephone.getText(), txtAddress.getText(), txtPostcode.getText()};
 
         //Empty textbox validation
-        for(int i = 0; i<7; i++){
+        for(int i = 0; i<6; i++){
             if(empty[i].isEmpty()){
                 emptyErrors++;
             }
@@ -501,7 +422,7 @@ public class AddReturningClient extends javax.swing.JFrame {
                 if(currentMonth<=monthResult){
                     if(currentDay<=dayResult){
                     }
-                    
+
                     else{
                         dateErrors++;
                     }
@@ -510,12 +431,12 @@ public class AddReturningClient extends javax.swing.JFrame {
                     dateErrors++;
                 }
                 dateErrors++;
-                
+
             }
             else if(ageResult<18){
                 dateErrors++;
             }
-            
+
         }
 
         //Length Validation
@@ -538,9 +459,7 @@ public class AddReturningClient extends javax.swing.JFrame {
         if(txtPostcode.getText().length() >8){
             lengthErrors++;
         }
-        if(txtSummary.getText().length() >200){
-            lengthErrors++;
-        }
+
 
         //Checking to see if there are any errors
         if(emptyErrors>0){
@@ -564,33 +483,43 @@ public class AddReturningClient extends javax.swing.JFrame {
                 conn = DriverManager.getConnection(url);
                 System.out.println("Connection to SQLite has been established.");
 
-                String sql = "INSERT INTO queue(first_name, last_name, category, summary, client_id) VALUES(?,?,?,?,?)";
+                String sql = "UPDATE client SET first_name = ? ,"
+                + "last_name = ? ,"
+                + "DOB = ? ,"
+                + "Email = ? ,"        
+                + "Telephone = ? ,"        
+                + "Address = ? ,"
+                + "Postcode = ? "
+                + "WHERE client_id = ?";
+        
+        
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
+            int id = Integer.parseInt(txtClientID.getText());
 
-                PreparedStatement pstmt = conn.prepareStatement(sql);
 
                 // set the corresponding param
-
-                String category = (String)txtCategory.getSelectedItem();
-
-                
                 pstmt.setString(1, txtForename.getText());
                 pstmt.setString(2, txtSurname.getText());
-                pstmt.setString(3, category);
-                pstmt.setString(4, txtSummary.getText());
-                pstmt.setString(5, txtClientID.getText());
+                pstmt.setString(3, txtDOB.getText());
+                pstmt.setString(4, txtEmail.getText());
+                pstmt.setString(5, txtTelephone.getText());
+                pstmt.setString(6, txtAddress.getText());
+                pstmt.setString(7, txtPostcode.getText());
+                pstmt.setInt(8, id);
+            
+            // update 
+            
 
-                String ID = txtClientID.getText();
 
                 // insert
                 pstmt.executeUpdate();
 
                 conn.close();
 
-                JOptionPane.showMessageDialog(null, "Client with ID number "+ID+" has been added.");
-                ControlPanel ul =new ControlPanel();
-                ul.setVisible(true);
-                dispose();
+                String ID = txtClientID.getText();
+                
+                JOptionPane.showMessageDialog(null, "Client with ID number "+ID+" has been update.");
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -604,7 +533,7 @@ public class AddReturningClient extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtForenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtForenameActionPerformed
         // TODO add your handling code here:
@@ -614,16 +543,8 @@ public class AddReturningClient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClientIDActionPerformed
 
-    private void txtQueueIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQueueIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQueueIDActionPerformed
-
-    private void txtQueueIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQueueIDKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQueueIDKeyReleased
-
     private void txtClientIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientIDKeyReleased
-// TODO add your handling code here:
+        // TODO add your handling code here:
         if(txtClientID.getText().isEmpty()){
             txtClientID.setText("");
             txtForename.setText("");
@@ -649,7 +570,7 @@ public class AddReturningClient extends javax.swing.JFrame {
             pstmt.setString(1,txtClientID.getText());
 
             ResultSet rs=pstmt.executeQuery();
-            
+
             if(rs.next()){
 
                 String add1=rs.getString("first_name");
@@ -660,51 +581,72 @@ public class AddReturningClient extends javax.swing.JFrame {
 
                 String add3=rs.getString("DOB");
                 txtDOB.setText(add3);
-               
+
                 String add4=rs.getString("Email");
                 txtEmail.setText(add4);
 
                 String add5=rs.getString("Telephone");
                 txtTelephone.setText(add5);
-                
+
                 String add6=rs.getString("Address");
                 txtAddress.setText(add6);
 
                 String add7=rs.getString("Postcode");
                 txtPostcode.setText(add7);
 
+               
+                txtForename.setEditable(true);
+                txtSurname.setEditable(true);
+                txtDOB.setEditable(true);
+                txtEmail.setEditable(true);
+                txtTelephone.setEditable(true);
+                txtAddress.setEditable(true);
+                txtPostcode.setEditable(true);
+                
+                txtForename.setBackground(Color.white);
+                txtSurname.setBackground(Color.white);
+                txtDOB.setBackground(Color.white);
+                txtEmail.setBackground(Color.white);
+                txtTelephone.setBackground(Color.white);
+                txtAddress.setBackground(Color.white);
+                txtPostcode.setBackground(Color.white);
+                
                 conn.close();
             }
             else{
 
-            txtForename.setText("");
-            txtSurname.setText("");
-            txtDOB.setText("");
-            txtEmail.setText("");
-            txtTelephone.setText("");
-            txtAddress.setText("");
-            txtPostcode.setText("");
+                txtForename.setText("");
+                txtSurname.setText("");
+                txtDOB.setText("");
+                txtEmail.setText("");
+                txtTelephone.setText("");
+                txtAddress.setText("");
+                txtPostcode.setText("");
+                
+                txtForename.setEditable(false);
+                txtSurname.setEditable(false);
+                txtDOB.setEditable(false);
+                txtEmail.setEditable(false);
+                txtTelephone.setEditable(false);
+                txtAddress.setEditable(false);
+                txtPostcode.setEditable(false);
+                
+                txtForename.setBackground(Color.lightGray);
+                txtSurname.setBackground(Color.lightGray);
+                txtDOB.setBackground(Color.lightGray);
+                txtEmail.setBackground(Color.lightGray);
+                txtTelephone.setBackground(Color.lightGray);
+                txtAddress.setBackground(Color.lightGray);
+                txtPostcode.setBackground(Color.lightGray);
             }
 
-           
+            
         }
         catch(Exception e)
         {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_txtClientIDKeyReleased
-
-    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
-        // TODO add your handling code here:
-
-        JOptionPane.showMessageDialog(null,
-            "<html><h1><b>Steps to adding a returning client to the queue</b></h1>\n"
-                    + "Type in the clients ClientID which will automatically fill in all personal fields.\n"
-                    + "Fill in remaining fields\n"
-                    + "Click the 'Add' button to add the client into the queue\n\n"
-                    + "QueueID is automatically assigned to each client"
-            ,"Help", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_btnHelpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -723,34 +665,30 @@ public class AddReturningClient extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddReturningClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AmendDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddReturningClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AmendDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddReturningClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AmendDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddReturningClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AmendDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddReturningClient().setVisible(true);
+                new AmendDetails().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnHelp;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -760,16 +698,12 @@ public class AddReturningClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JComboBox<String> txtCategory;
     private javax.swing.JTextField txtClientID;
     private javax.swing.JFormattedTextField txtDOB;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtForename;
     private javax.swing.JTextField txtPostcode;
-    private javax.swing.JTextField txtQueueID;
-    private javax.swing.JTextArea txtSummary;
     private javax.swing.JTextField txtSurname;
     private javax.swing.JTextField txtTelephone;
     // End of variables declaration//GEN-END:variables

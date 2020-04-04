@@ -35,6 +35,7 @@ public class ControlPanel extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnAddtoQueue = new javax.swing.JButton();
         btnAssignClient = new javax.swing.JButton();
+        btnAddtoQueue1 = new javax.swing.JButton();
 
         btnReset1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnReset1.setText("Add Client");
@@ -95,23 +96,35 @@ public class ControlPanel extends javax.swing.JFrame {
             }
         });
 
+        btnAddtoQueue1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddtoQueue1.setText("Amend Client Details");
+        btnAddtoQueue1.setName("btnAddtoQueue"); // NOI18N
+        btnAddtoQueue1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddtoQueue1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(383, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAddtoQueue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAssignClient, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddtoQueue1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                    .addComponent(btnAssignClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(352, 352, 352))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(169, 169, 169)
+                .addGap(96, 96, 96)
                 .addComponent(btnAddtoQueue, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAddtoQueue1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAssignClient, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(428, Short.MAX_VALUE))
         );
@@ -153,6 +166,14 @@ public class ControlPanel extends javax.swing.JFrame {
         dispose();        
     }//GEN-LAST:event_btnAssignClientActionPerformed
 
+    private void btnAddtoQueue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddtoQueue1ActionPerformed
+        // TODO add your handling code here:
+        
+        AmendDetails ul =new AmendDetails();
+        ul.setVisible(true);
+        dispose();       
+    }//GEN-LAST:event_btnAddtoQueue1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -190,6 +211,7 @@ public class ControlPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddtoQueue;
+    private javax.swing.JButton btnAddtoQueue1;
     private javax.swing.JButton btnAssignClient;
     private javax.swing.JButton btnReset1;
     private javax.swing.JLabel jLabel1;
